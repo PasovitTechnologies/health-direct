@@ -22,7 +22,7 @@ function DoctorProfile() {
 
   async function fetchDoctorByName(f, m, l) {
     try {
-      const res = await axios.get("http://localhost:5001/api/doctors/by-name", {
+      const res = await axios.get("${BASE_URL}/api/doctors/by-name", {
         params: { firstName: f, middleName: m, lastName: l },
       });
       setDoctor(res.data);
@@ -45,7 +45,7 @@ function DoctorProfile() {
         updatedDoctor.fees.amount = Number(updatedDoctor.fees.amount) || null; // Convert to number or null if invalid
       }
 
-      await axios.put(`http://localhost:5001/api/doctors/${doctor._id}`, updatedDoctor);
+      await axios.put(`${BASE_URL}/api/doctors/${doctor._id}`, updatedDoctor);
       alert("Profile updated successfully!");
       setEditMode(false);
     } catch (error) {

@@ -27,7 +27,7 @@ function Doctor() {
   // Fetch doctors from backend
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/doctors");
+      const response = await axios.get("${BASE_URL}/api/doctors");
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
@@ -292,7 +292,7 @@ function AddDoctorModal({ closeModal }) {
         phone,
         fees, // Include fees in the payload
       };
-      await axios.post("http://localhost:5001/api/doctors", newDoctor);
+      await axios.post("${BASE_URL}/api/doctors", newDoctor);
       alert("Doctor added successfully!");
       closeModal();
     } catch (error) {

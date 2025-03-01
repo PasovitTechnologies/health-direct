@@ -33,7 +33,7 @@ const WhatsAppContent = () => {
   const fetchChats = async (filter = "") => {
     try {
       const response = await axios.get(
-        "http://localhost:5001/api/whatsapp/chats/filter",
+        "${BASE_URL}/api/whatsapp/chats/filter",
         { params: { client_name: filter } }
       );
       setChats(response.data.dialogs || []);
@@ -47,7 +47,7 @@ const WhatsAppContent = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:5001/api/whatsapp/chat/messages",
+        "${BASE_URL}/api/whatsapp/chat/messages",
         { params: { chat_id: chatId } }
       );
       setMessages(response.data.reverse() || []);
@@ -67,7 +67,7 @@ const WhatsAppContent = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5001/api/whatsapp/send", {
+      await axios.post("${BASE_URL}/api/whatsapp/send", {
         to: selectedChat.id,
         message,
       });
@@ -149,7 +149,7 @@ const WhatsAppContent = () => {
         file_data: base64File,
         file_type: fileType,
       };
-      await axios.post("http://localhost:5001/api/whatsapp/document/send", payload, {
+      await axios.post("${BASE_URL}/api/whatsapp/document/send", payload, {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
       setSelectedFile(null);

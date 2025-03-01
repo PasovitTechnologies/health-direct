@@ -27,14 +27,14 @@ function ApplicationPayment({ application, onClose, onSuccess }) {
           throw new Error("Invalid doctor ID");
         }
 
-        const doctorResponse = await axios.get(`http://localhost:5001/api/doctors/${doctorId}`);
+        const doctorResponse = await axios.get(`${BASE_URL}/api/doctors/${doctorId}`);
         const doctor = doctorResponse.data;
         const feeAmount = doctor.fees?.amount || 0; // Default to 0 if no fees
         const currency = doctor.fees?.currency || "INR"; // Default to INR if no currency specified
         setServices([{ name: "Doctor Fees", price: feeAmount, quantity: 1, currency }]); // Include currency for clarity
 
         // Fetch payment history for the application
-        const historyResponse = await axios.get(`http://localhost:5001/api/payments/applications/${application._id?.toString()}/payments`);
+        const historyResponse = await axios.get(`${BASE_URL}/api/payments/applications/${application._id?.toString()}/payments`);
         setPaymentHistory(historyResponse.data || []);
 
         // Fetch patient's email using patient ID from application
@@ -43,7 +43,7 @@ function ApplicationPayment({ application, onClose, onSuccess }) {
           throw new Error("Invalid patient ID");
         }
 
-        const patientResponse = await axios.get(`http://localhost:5001/api/patients/${patientId}`);
+        const patientResponse = await axios.get(`${BASE_URL}/api/patients/${patientId}`);
         const patient = patientResponse.data;
         setPatientEmail(patient.email || "default@example.com"); // Use patient's email or fallback
       } catch (err) {
@@ -101,7 +101,7 @@ function ApplicationPayment({ application, onClose, onSuccess }) {
       const email = patientEmail; // Use dynamically fetched patient email
       const course = services.map(s => `${s.name} x${s.quantity} = ${s.price * s.quantity} ${s.currency || "INR"}`).join(", ");
 
-      const response = await axios.post("http://localhost:5001/api/payments/stripe/create-payment-link", {
+      const response = await axios.post("${BASE_URL}/api/payments/stripe/create-payment-link", {
         amount: totalAmount,
         email,
         course,
@@ -117,7 +117,7 @@ function ApplicationPayment({ application, onClose, onSuccess }) {
           throw new Error("Invalid application ID");
         }
 
-        await axios.post(`http://localhost:5001/api/payments/applications/${applicationId}/invoice`, {
+        await axios.post(`${BASE_URL}/api/payments/applications/${applicationId}/invoice`, {
           stripeInvoiceId, // Pass Stripe's orderId as stripeInvoiceId
           services: services.map(service => ({
             name: service.name,
@@ -153,7 +153,7 @@ function ApplicationPayment({ application, onClose, onSuccess }) {
 
     try {
       const email = patientEmail; // Use dynamically fetched patient email
-      await axios.post("http://localhost:5001/api/payments/send-email", {
+      await axios.post("${BASE_URL}/api/payments/send-email", {
         email,
         paymentUrl,
       });

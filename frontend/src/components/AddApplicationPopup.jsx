@@ -4,7 +4,7 @@ import "../styles/AddApplicationPopup.css";
 import { FaTimes } from "react-icons/fa";
 import { io } from "socket.io-client"; // Import socket.io-client
 
-const socket = io("http://localhost:5001"); // Connect to backend WebSocket
+const socket = io(BASE_URL); // Connect to backend WebSocket
 
 function AddApplicationPopup({ onClose, onAdd }) {
   const [patients, setPatients] = useState([]);
@@ -29,7 +29,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/patients"); // Remove .populate(), rely on backend
+      const response = await axios.get("${BASE_URL}/api/patients"); // Remove .populate(), rely on backend
       setPatients(response.data);
     } catch (error) {
       console.error("Error fetching patients:", error);
@@ -38,7 +38,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/doctors"); // Remove .populate(), rely on backend
+      const response = await axios.get("${BASE_URL}/api/doctors"); // Remove .populate(), rely on backend
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
@@ -55,7 +55,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
 
   const fetchDoctorSpecialty = async (doctorId) => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/doctors/${doctorId}`);
+      const response = await axios.get(`${BASE_URL}/api/doctors/${doctorId}`);
       setFormData((prev) => ({
         ...prev,
         specialty: response.data.specialty,
@@ -75,7 +75,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
     const endTime = new Date(date.getTime() + 60 * 60 * 1000).toISOString().split("T")[1].split(".")[0]; // Assume 1-hour duration
 
     try {
-      const response = await axios.get("http://localhost:5001/api/applications", {
+      const response = await axios.get("${BASE_URL}/api/applications", {
         params: {
           doctor,
           recordDate: date.toISOString().split("T")[0], // Only date part
@@ -111,7 +111,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
     }
   
     try {
-      const response = await axios.post("http://localhost:5001/api/applications", {
+      const response = await axios.post("${BASE_URL}/api/applications", {
         ...formData,
         patient: formData.patient, // Ensure patient is _id
         doctor: formData.doctor, // Ensure doctor is _id
@@ -120,8 +120,8 @@ function AddApplicationPopup({ onClose, onAdd }) {
       });
 
       // Sync with appointment using new endpoint in appointment-routes.js, including patientName and doctorName
-      const patient = await axios.get(`http://localhost:5001/api/patients/${formData.patient}`);
-      const doctor = await axios.get(`http://localhost:5001/api/doctors/${formData.doctor}`);
+      const patient = await axios.get(`${BASE_URL}/api/patients/${formData.patient}`);
+      const doctor = await axios.get(`${BASE_URL}/api/doctors/${formData.doctor}`);
       const patientName = `${patient.data.firstName || ""} ${patient.data.middleName || ""} ${patient.data.lastName || ""}`.trim() || "Unknown Patient";
       const doctorName = `${doctor.data.firstName || ""} ${doctor.data.middleName || ""} ${doctor.data.lastName || ""}`.trim() || "Unknown Doctor";
 
@@ -129,7 +129,7 @@ function AddApplicationPopup({ onClose, onAdd }) {
       const startTime = date.toTimeString().split(" ")[0].slice(0, 5); // HH:MM (UTC)
       const endTime = new Date(date.getTime() + 60 * 60 * 1000).toTimeString().split(" ")[0].slice(0, 5); // +1 hour
 
-      await axios.post("http://localhost:5001/api/appointments/sync", {
+      await axios.post("${BASE_URL}/api/appointments/sync", {
         applicationId: response.data._id,
         patientName,
         doctorName,

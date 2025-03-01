@@ -50,7 +50,7 @@ function Applications() {
         appointmentStatus: filters.appointmentStatus || undefined,
         paymentStatus: filters.paymentStatus || undefined,
       });
-      const response = await axios.get("http://localhost:5001/api/applications", {
+      const response = await axios.get("${BASE_URL}/api/applications", {
         params: {
           page: currentPage,
           limit: itemsPerPage,
@@ -122,7 +122,7 @@ function Applications() {
 
     try {
       console.log("Adding comment to application:", application._id, "with text:", commentText);
-      const response = await axios.post(`http://localhost:5001/api/applications/${application._id}/comments`, {
+      const response = await axios.post(`${BASE_URL}/api/applications/${application._id}/comments`, {
         text: commentText,
       });
       fetchApplications();
@@ -149,8 +149,8 @@ function Applications() {
       return;
     }
     try {
-      console.log("Updating comment with ID:", commentId, "at URL:", `http://localhost:5001/api/comments/${commentId}`);
-      await axios.put(`http://localhost:5001/api/comments/${commentId}`, {
+      console.log("Updating comment with ID:", commentId, "at URL:", `${BASE_URL}/api/comments/${commentId}`);
+      await axios.put(`${BASE_URL}/api/comments/${commentId}`, {
         text: editCommentText,
       });
       fetchApplications();
@@ -199,10 +199,10 @@ function Applications() {
       let recipientId, endpoint;
       if (recipientType === "patient") {
         recipientId = application.patient?._id?.toString() || application.patient;
-        endpoint = `http://localhost:5001/api/patients/${recipientId}`; // Use patient-routes.js
+        endpoint = `${BASE_URL}/api/patients/${recipientId}`; // Use patient-routes.js
       } else if (recipientType === "doctor") {
         recipientId = application.doctor?._id?.toString() || application.doctor;
-        endpoint = `http://localhost:5001/api/doctors/${recipientId}`; // Use doctor-routes.js
+        endpoint = `${BASE_URL}/api/doctors/${recipientId}`; // Use doctor-routes.js
       }
 
       if (!recipientId || typeof recipientId !== "string") {
@@ -229,7 +229,7 @@ function Applications() {
     setError("");
 
     try {
-      await axios.post("http://localhost:5001/api/applications/emails/send", {
+      await axios.post("${BASE_URL}/api/applications/emails/send", {
         to: emailRecipient,
         subject: emailSubject,
         body: emailBody,
@@ -321,7 +321,7 @@ function Applications() {
     if (doc.url) {
       window.open(doc.url, "_blank");
     } else {
-      window.open(`http://localhost:5001/api/media/${doc._id}`, "_blank");
+      window.open(`${BASE_URL}/api/media/${doc._id}`, "_blank");
     }
   };
 

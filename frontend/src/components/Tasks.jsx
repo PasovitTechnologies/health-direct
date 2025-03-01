@@ -18,7 +18,7 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const socket = io("http://localhost:5001"); // Connect to backend WebSocket
+const socket = io("${BASE_URL}"); // Connect to backend WebSocket
 
 const TaskTooltip = ({ item, position, onClose }) => { // Updated to handle both tasks and appointments
   if (!item) return null;
@@ -284,11 +284,11 @@ const Tasks = () => {
   const fetchUniqueExecutors = async () => {
     try {
       // Fetch unique executors from tasks
-      const taskExecutorsResponse = await axios.get("http://localhost:5001/api/tasks/unique-executors");
+      const taskExecutorsResponse = await axios.get("${BASE_URL}/api/tasks/unique-executors");
       const taskExecutors = taskExecutorsResponse.data.filter(Boolean);
 
       // Fetch unique doctors from appointments
-      const doctorNamesResponse = await axios.get("http://localhost:5001/api/appointments/unique-doctors");
+      const doctorNamesResponse = await axios.get("${BASE_URL}/api/appointments/unique-doctors");
       const doctorNames = doctorNamesResponse.data.filter(Boolean);
 
       // Combine and deduplicate executors and doctors
@@ -319,15 +319,15 @@ const Tasks = () => {
 
       if (!filter.executor || filter.executor === "") {
         // Fetch all tasks and appointments when no executor/doctor is selected
-        tasksResponse = await axios.get(`http://localhost:5001/api/tasks/all-tasks?startDate=${startDate}&endDate=${endDate}`);
-        appointmentsResponse = await axios.get(`http://localhost:5001/api/appointments/all-appointments?startDate=${startDate}&endDate=${endDate}`);
+        tasksResponse = await axios.get(`${BASE_URL}/api/tasks/all-tasks?startDate=${startDate}&endDate=${endDate}`);
+        appointmentsResponse = await axios.get(`${BASE_URL}/api/appointments/all-appointments?startDate=${startDate}&endDate=${endDate}`);
       } else {
         // Fetch filtered tasks and appointments when an executor/doctor is selected
         tasksResponse = await axios.get(
-          `http://localhost:5001/api/tasks/filter-by-executor?startDate=${startDate}&endDate=${endDate}&executor=${encodeURIComponent(filter.executor)}`
+          `${BASE_URL}/api/tasks/filter-by-executor?startDate=${startDate}&endDate=${endDate}&executor=${encodeURIComponent(filter.executor)}`
         );
         appointmentsResponse = await axios.get(
-          `http://localhost:5001/api/appointments/filter-by-doctor?startDate=${startDate}&endDate=${endDate}&doctorName=${encodeURIComponent(filter.executor)}`
+          `${BASE_URL}/api/appointments/filter-by-doctor?startDate=${startDate}&endDate=${endDate}&doctorName=${encodeURIComponent(filter.executor)}`
         ).catch(error => {
           console.error("Error fetching appointments:", error.response?.data || error.message);
           return { data: [] }; // Fallback to empty array if API fails
@@ -366,21 +366,21 @@ const Tasks = () => {
     try {
       if (!date) throw new Error("No date provided for day items");
       const formattedDate = formatDateForAPI(date); // Use validated YYYY-MM-DD format
-      console.log(`Fetching items for date: http://localhost:5001/api/tasks?date=${formattedDate}`);
-      console.log(`Fetching items for date: http://localhost:5001/api/appointments?date=${formattedDate}`);
+      console.log(`Fetching items for date: ${BASE_URL}/api/tasks?date=${formattedDate}`);
+      console.log(`Fetching items for date: ${BASE_URL}/api/appointments?date=${formattedDate}`);
       let tasksResponse, appointmentsResponse;
 
       if (!filter.executor || filter.executor === "") {
         // Fetch all tasks and appointments for the specific date when no executor/doctor is selected
-        tasksResponse = await axios.get(`http://localhost:5001/api/tasks/all-tasks?date=${formattedDate}`);
-        appointmentsResponse = await axios.get(`http://localhost:5001/api/appointments/all-appointments?date=${formattedDate}`);
+        tasksResponse = await axios.get(`${BASE_URL}/api/tasks/all-tasks?date=${formattedDate}`);
+        appointmentsResponse = await axios.get(`${BASE_URL}/api/appointments/all-appointments?date=${formattedDate}`);
       } else {
         // Fetch filtered tasks and appointments for the specific date when an executor/doctor is selected
         tasksResponse = await axios.get(
-          `http://localhost:5001/api/tasks/filter-by-executor?date=${formattedDate}&executor=${encodeURIComponent(filter.executor)}`
+          `${BASE_URL}/api/tasks/filter-by-executor?date=${formattedDate}&executor=${encodeURIComponent(filter.executor)}`
         );
         appointmentsResponse = await axios.get(
-          `http://localhost:5001/api/appointments/filter-by-doctor?date=${formattedDate}&doctorName=${encodeURIComponent(filter.executor)}`
+          `${BASE_URL}/api/appointments/filter-by-doctor?date=${formattedDate}&doctorName=${encodeURIComponent(filter.executor)}`
         ).catch(error => {
           console.error("Error fetching appointments for day:", error.response?.data || error.message);
           return { data: [] }; // Fallback to empty array if API fails

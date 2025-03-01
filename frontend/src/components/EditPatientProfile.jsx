@@ -98,7 +98,7 @@ function EditPatientProfile({ patient, medical, editType, onCancel, onSave }) {
         return;
       }
       try {
-        const response = await axios.put(`http://localhost:5001/api/patients/${patient._id}`, editedData.general);
+        const response = await axios.put(`${BASE_URL}/api/patients/${patient._id}`, editedData.general);
         onSave(response.data.patient);
         alert("Patient updated successfully!");
       } catch (error) {
@@ -123,7 +123,7 @@ function EditPatientProfile({ patient, medical, editType, onCancel, onSave }) {
           }
         });
 
-        const response = await axios.put(`http://localhost:5001/api/patients/${patient._id}/medical`, formData, {
+        const response = await axios.put(`${BASE_URL}/api/patients/${patient._id}/medical`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -141,7 +141,7 @@ function EditPatientProfile({ patient, medical, editType, onCancel, onSave }) {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this patient?")) return;
     try {
-      await axios.delete(`http://localhost:5001/api/patients/${patient._id}`);
+      await axios.delete(`${BASE_URL}/api/patients/${patient._id}`);
       alert("Patient deleted successfully!");
       navigate("/patients"); // Redirect back to Patients tab after deletion
     } catch (error) {

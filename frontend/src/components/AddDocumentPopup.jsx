@@ -53,7 +53,7 @@ function AddDocumentPopup({ applicationId, onClose, onAdd }) {
 
     try {
       console.log("Submitting documents with formData:", Object.fromEntries(formData));
-      await axios.post(`http://localhost:5001/api/applications/${applicationId}/documents`, formData, {
+      await axios.post(`${BASE_URL}/api/applications/${applicationId}/documents`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

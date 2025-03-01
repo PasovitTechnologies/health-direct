@@ -24,7 +24,7 @@ function PatientProfile() {
     const fetchData = async () => {
       try {
         // Fetch patient data
-        const patientResponse = await axios.get(`http://localhost:5001/api/patients/${id}`);
+        const patientResponse = await axios.get(`${BASE_URL}/api/patients/${id}`);
         const foundPatient = patientResponse.data;
 
         if (!foundPatient) {
@@ -35,12 +35,12 @@ function PatientProfile() {
 
         // Fetch medical data with populated media
         try {
-          const medicalResponse = await axios.get(`http://localhost:5001/api/patients/${id}/medical`);
+          const medicalResponse = await axios.get(`${BASE_URL}/api/patients/${id}/medical`);
           setMedical(medicalResponse.data || { medicalHistory: "", medicalComments: "", media: [] });
         } catch (medicalError) {
           if (medicalError.response && medicalError.response.status === 404) {
             // Create default medical record if not found
-            const newMedical = await axios.put(`http://localhost:5001/api/patients/${id}/medical`, {
+            const newMedical = await axios.put(`${BASE_URL}/api/patients/${id}/medical`, {
               medicalHistory: "",
               medicalComments: "",
               media: [],
@@ -52,7 +52,7 @@ function PatientProfile() {
         }
 
         // Fetch application history for the patient using the improved route
-        const historyResponse = await axios.get(`http://localhost:5001/api/applications/patient/${id}/history`);
+        const historyResponse = await axios.get(`${BASE_URL}/api/applications/patient/${id}/history`);
         setApplicationHistory(historyResponse.data.applications || []);
       } catch (err) {
         setError(err.message || "Error fetching patient data or history");
@@ -67,7 +67,7 @@ function PatientProfile() {
   // Function to generate Blob URL for medical media
   const getMediaBlobUrl = async (mediaId) => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/patients/${id}/medical/media/${mediaId}`, {
+      const response = await axios.get(`${BASE_URL}/api/patients/${id}/medical/media/${mediaId}`, {
         responseType: 'blob', // Ensure binary data is received as Blob
       });
       return URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
@@ -82,7 +82,7 @@ function PatientProfile() {
     if (doc.url) {
       window.open(doc.url, "_blank");
     } else {
-      const response = await axios.get(`http://localhost:5001/api/applications/media/${doc._id}`, {
+      const response = await axios.get(`${BASE_URL}/api/applications/media/${doc._id}`, {
         responseType: 'blob',
       });
       const blobUrl = URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));

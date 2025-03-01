@@ -41,7 +41,7 @@ const MessagesContainer = ({ messages, loading }) => {
   const fetchMedia = async (messageId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5001/api/whatsapp/media`,
+        `${BASE_URL}/api/whatsapp/media`,
         {
           params: {
             profile_id: "981ee345-1804",

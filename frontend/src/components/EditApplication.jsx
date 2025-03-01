@@ -6,7 +6,7 @@ import { FaTimes, FaTrash, FaFilePdf } from "react-icons/fa";
 import { formatForDatetimeLocal, formatForMongoDB } from "../utils/dateUtils"; // Import date utilities
 import { io } from "socket.io-client"; // Import socket.io-client
 
-const socket = io("http://localhost:5001"); // Connect to backend WebSocket
+const socket = io("${BASE_URL}"); // Connect to backend WebSocket
 
 function EditApplication() {
   const { id } = useParams();
@@ -37,7 +37,7 @@ function EditApplication() {
 
   const fetchApplication = async () => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/applications/${id}`); // Remove .populate(), rely on backend
+      const response = await axios.get(`${BASE_URL}/api/applications/${id}`); // Remove .populate(), rely on backend
       setApplication(response.data);
       const recordDate = formatForDatetimeLocal(response.data.recordDate);
       setFormData({
@@ -61,7 +61,7 @@ function EditApplication() {
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/doctors"); // Remove .populate(), rely on backend
+      const response = await axios.get("${BASE_URL}/api/doctors"); // Remove .populate(), rely on backend
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
@@ -71,7 +71,7 @@ function EditApplication() {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/patients"); // Remove .populate(), rely on backend
+      const response = await axios.get("${BASE_URL}/api/patients"); // Remove .populate(), rely on backend
       setPatients(response.data);
     } catch (error) {
       console.error("Error fetching patients:", error);
@@ -89,7 +89,7 @@ function EditApplication() {
 
   const fetchDoctorSpecialty = async (doctorId) => {
     try {
-      const response = await axios.get(`http://localhost:5001/api/doctors/${doctorId}`);
+      const response = await axios.get(`${BASE_URL}/api/doctors/${doctorId}`);
       setFormData((prev) => ({
         ...prev,
         specialty: response.data.specialty || "",
@@ -115,7 +115,7 @@ function EditApplication() {
       const startTime = date.toISOString().split("T")[1].split(".")[0].slice(0, 5); // HH:MM
       const endTime = new Date(date.getTime() + 60 * 60 * 1000).toISOString().split("T")[1].split(".")[0].slice(0, 5); // +1 hour
 
-      const response = await axios.get("http://localhost:5001/api/applications", {
+      const response = await axios.get("${BASE_URL}/api/applications", {
         params: {
           doctor,
           recordDate: date.toISOString().split("T")[0], // Only date part
@@ -170,7 +170,7 @@ function EditApplication() {
         previousComments: formData.previousComments,
       });
 
-      const response = await axios.put(`http://localhost:5001/api/applications/${id}`, {
+      const response = await axios.put(`${BASE_URL}/api/applications/${id}`, {
         ...formData,
         recordDate: formattedRecordDate,
         previousComments: formData.previousComments,
@@ -178,7 +178,7 @@ function EditApplication() {
 
       // Sync with appointment using new endpoint in appointment-routes.js, with URL-encoded ID
       const encodedId = encodeURIComponent(response.data.id);
-      await axios.put(`http://localhost:5001/api/appointments/sync/${encodedId}`, { applicationId: response.data._id });
+      await axios.put(`${BASE_URL}/api/appointments/sync/${encodedId}`, { applicationId: response.data._id });
       socket.emit("updateApplication", response.data); // Notify Tasks.jsx
       alert("Application updated successfully!");
       navigate("/applications"); // Redirect back to applications page
@@ -191,7 +191,7 @@ function EditApplication() {
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this application?")) {
       try {
-        await axios.delete(`http://localhost:5001/api/applications/${id}`);
+        await axios.delete(`${BASE_URL}/api/applications/${id}`);
         socket.emit("deleteApplication", id); // Notify Tasks.jsx (optional)
         alert("Application deleted successfully!");
         navigate("/applications"); // Redirect back to applications page
@@ -205,7 +205,7 @@ function EditApplication() {
   const handleDeleteDocument = async (docId) => {
     if (window.confirm("Are you sure you want to delete this document?")) {
       try {
-        await axios.delete(`http://localhost:5001/api/media/${docId}`); // Exclusive to EditApplication
+        await axios.delete(`${BASE_URL}/api/media/${docId}`); // Exclusive to EditApplication
         fetchApplication(); // Refresh application data
         alert("Document deleted successfully!");
       } catch (error) {
@@ -218,8 +218,8 @@ function EditApplication() {
   const handleDeleteComment = async (commentId) => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       try {
-        console.log("Deleting comment with ID:", commentId, "at URL:", `http://localhost:5001/api/comments/${commentId}`);
-        await axios.delete(`http://localhost:5001/api/comments/${commentId}`);
+        console.log("Deleting comment with ID:", commentId, "at URL:", `${BASE_URL}/api/comments/${commentId}`);
+        await axios.delete(`${BASE_URL}/api/comments/${commentId}`);
         fetchApplication(); // Refresh application data
         alert("Comment deleted successfully!");
       } catch (error) {
@@ -233,7 +233,7 @@ function EditApplication() {
     if (doc.url) {
       window.open(doc.url, "_blank");
     } else if (doc.path) {
-      window.open(`http://localhost:5001/api/media/${doc._id}`, "_blank");
+      window.open(`${BASE_URL}/api/media/${doc._id}`, "_blank");
     } else {
       setError("No preview available for this document.");
     }

@@ -36,7 +36,7 @@ const AddTaskModal = ({ isOpen, onClose, refreshTasks, selectedDate, task }) => 
   const fetchExistingTasks = async () => {
     if (!date) return;
     try {
-      const response = await fetch(`http://localhost:5001/api/tasks?date=${date}`);
+      const response = await fetch(`${BASE_URL}/api/tasks?date=${date}`);
       if (!response.ok) throw new Error("Failed to fetch existing tasks");
       const tasks = await response.json();
       setExistingTasks(tasks.sort((a, b) => a.startTime.localeCompare(b.startTime)));
@@ -155,7 +155,7 @@ const AddTaskModal = ({ isOpen, onClose, refreshTasks, selectedDate, task }) => 
 
     try {
       const method = task ? "PUT" : "POST"; // Use PUT for editing, POST for adding
-      const url = task ? `http://localhost:5001/api/tasks/${task._id}` : "http://localhost:5001/api/tasks";
+      const url = task ? `${BASE_URL}/api/tasks/${task._id}` : "${BASE_URL}/api/tasks";
       const response = await fetch(url, {
         method,
         headers: {

@@ -26,7 +26,7 @@ function Patient() {
   // Fetch patients from backend
   const fetchPatients = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/api/patients");
+      const response = await axios.get("${BASE_URL}/api/patients");
       setPatients(response.data || []); // Ensure patients is always an array, even if empty
     } catch (error) {
       console.error("Error fetching patients:", error);
@@ -243,7 +243,7 @@ function AddPatientModal({ closeModal }) {
         additionalPhone,
         email,
       };
-      await axios.post("http://localhost:5001/api/patients", newPatient);
+      await axios.post("${BASE_URL}/api/patients", newPatient);
       alert("Patient added successfully!");
       closeModal();
     } catch (error) {
