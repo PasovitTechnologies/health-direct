@@ -1,0 +1,320 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure modal stays on top */
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 30px; /* Increased padding for spaciousness */
+    width: 500px; /* Wider modal for better layout */
+    border-radius: 12px; /* Slightly larger radius */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Softer, larger shadow */
+    position: relative;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+    max-height: 90vh; /* Prevent overflow on smaller screens */
+    overflow-y: auto;
+  }
+  
+  .modal-title {
+    text-align: left; /* Align title to the left */
+    font-size: 24px; /* Larger font for prominence */
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 20px; /* Increased margin */
+  }
+  
+  .form-group {
+    margin: 20px 0; /* Increased margin for spacing */
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: 600; /* Slightly bolder for clarity */
+    margin-bottom: 8px; /* Reduced margin for tighter layout */
+    color: #2c3e50;
+    text-align: left; /* Align labels to the left */
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px; /* Increased padding for visibility */
+    border-radius: 8px; /* Slightly larger radius for clearer outlines */
+    border: 2px solid #b0e0e6; /* Clearer, lighter blue border to match image */
+    font-size: 16px; /* Larger font */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #f9f9f9; /* Light background for contrast */
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #37b8c0; /* Highlight on focus with theme color */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(55, 184, 192, 0.3); /* Focus ring */
+  }
+  
+  textarea {
+    min-height: 120px; /* Larger height for descriptions */
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 29px; /* Adjusted for better positioning */
+    right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Maintain size */
+    height: 30px;
+    background: #e53935; /* Red background for visibility */
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Slightly larger for visibility */
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .close-btn:hover, .close-btn:focus {
+    background-color: #d32f2f; /* Darker red on hover/focus */
+    transform: scale(1.1); /* Slight scale for interactivity */
+    outline: none;
+  }
+  
+  .close-btn:focus {
+    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.3); /* Focus ring */
+  }
+  
+  .time-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+    margin-bottom: 20px; /* Increased margin */
+  }
+  
+  .time-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center all elements horizontally */
+    gap: 4px; /* Reduced gap for compactness and alignment */
+    width: 100%; /* Ensure full width for centering */
+  }
+  
+  .time-controls button {
+    background: #b0e0e6; /* Lighter blue background to match image */
+    border: none;
+    padding: 4px 6px; /* Further reduced padding for smaller buttons */
+    border-radius: 4px; /* Smaller radius for compactness */
+    cursor: pointer;
+    font-size: 12px; /* Even smaller font for smaller buttons */
+    color: #2c3e50;
+    height: 38px; /* Maintain height to match time-input */
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .time-controls button:hover, .time-controls button:focus {
+    background: #a2d4e1; /* Lighter shade on hover/focus */
+    transform: scale(1.05); /* Slight scale for interactivity */
+    outline: none;
+  }
+  
+  .time-input {
+    min-width: 150px; /* Increased width for better visibility */
+    padding: 10px;
+    border: 2px solid #b0e0e6; /* Clearer, lighter blue border to match image */
+    border-radius: 6px; /* Slightly larger radius */
+    font-size: 16px; /* Larger font */
+    text-align: center; /* Center time value for clarity */
+    height: 38px; /* Match height of buttons for proportionality */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: #f9f9f9; /* Light background for contrast */
+    margin-top: 16px;
+
+  }
+  
+  .time-input:focus {
+    border-color: #37b8c0; /* Highlight on focus with theme color */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(55, 184, 192, 0.3); /* Focus ring */
+  }
+  
+  .save-btn {
+    width: 100%;
+    padding: 12px; /* Increased padding */
+    border: none;
+    background: #37b8c0; /* Theme color */
+    color: white;
+    border-radius: 6px; /* Slightly larger radius */
+    font-size: 18px; /* Larger font */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-align: center; /* Center text for consistency */
+  }
+  
+  .save-btn:hover, .save-btn:focus {
+    background: #2fa3ab; /* Darker shade on hover/focus */
+    transform: scale(1.05); /* Slight scale for interactivity */
+    outline: none;
+  }
+  
+  .save-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  /* Notification Messages */
+  .alert {
+    margin: 15px 0; /* Increased margin */
+    padding: 12px; /* Increased padding */
+    border-radius: 6px; /* Slightly larger radius */
+    text-align: left; /* Align to the left */
+    font-size: 16px; /* Larger font */
+    animation: fadeIn 0.5s ease-in; /* Subtle animation for engagement */
+    color: white;
+  }
+  
+  .alert-success {
+    background-color: #37b8c0; /* Verdigris theme */
+  }
+  
+  .alert-error {
+    background-color: #ff4d4d;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Loading Spinner */
+  .loading-spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .loading-spinner::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-top: 2px solid #2fa3ab;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 400px; /* Slightly narrower for tablets */
+      padding: 20px; /* Reduced padding */
+    }
+  
+    .modal-title {
+      font-size: 20px; /* Smaller font */
+    }
+  
+    .form-group {
+      margin: 15px 0; /* Reduced margin */
+    }
+  
+    input,
+    textarea,
+    .time-input {
+      font-size: 14px; /* Smaller font */
+      padding: 8px; /* Reduced padding */
+    }
+  
+    .close-btn {
+      width: 25px;
+      height: 25px;
+      font-size: 16px; /* Smaller font */
+    }
+  
+    .time-controls button {
+      padding: 3px 4px; /* Further reduced padding for smaller buttons */
+      font-size: 10px; /* Smaller font */
+      height: 32px; /* Reduced height for proportionality */
+    }
+  
+    .time-input {
+      width: 130px; /* Slightly narrower but still larger */
+      height: 32px; /* Reduced height for proportionality */
+    }
+  
+    .save-btn {
+      padding: 10px; /* Reduced padding */
+      font-size: 16px; /* Smaller font */
+    }
+  
+    .alert {
+      margin: 10px 0; /* Reduced margin */
+      padding: 10px; /* Reduced padding */
+      font-size: 14px; /* Smaller font */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-content {
+      width: 300px; /* Narrower for mobile */
+      padding: 15px; /* Reduced padding */
+    }
+  
+    .modal-title {
+      font-size: 18px; /* Smaller font */
+    }
+  
+    .form-group {
+      margin: 10px 0; /* Reduced margin */
+    }
+  
+    input,
+    textarea,
+    .time-input {
+      font-size: 12px; /* Smaller font */
+      padding: 6px; /* Reduced padding */
+    }
+  
+    .close-btn {
+      width: 20px;
+      height: 20px;
+      font-size: 14px; /* Smaller font */
+    }
+  
+    .time-controls button {
+      padding: 2px 3px; /* Further reduced padding for smaller buttons */
+      font-size: 8px; /* Smaller font */
+      height: 28px; /* Reduced height for proportionality */
+    }
+  
+    .time-input {
+      width: 110px; /* Narrower */
+      height: 28px; /* Reduced height for proportionality */
+    }
+  
+    .save-btn {
+      padding: 8px; /* Reduced padding */
+      font-size: 14px; /* Smaller font */
+    }
+  
+    .alert {
+      margin: 8px 0; /* Reduced margin */
+      padding: 8px; /* Reduced padding */
+      font-size: 12px; /* Smaller font */
+    }
+  }

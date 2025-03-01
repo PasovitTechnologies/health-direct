@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Bold:wght@400&family=Roboto+Condensed:wght@400&display=swap');
+
+.doctor-profile-container {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.doctor-profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.back-button {
+  background: #37b8c0;
+  max-width: 50px;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: #2da3a8;
+  transform: scale(1.05);
+}
+
+.back-button:active {
+  background: #228c91;
+  transform: scale(0.98);
+}
+
+.back-icon {
+  font-size: 16px;
+}
+
+.doctor-profile-title {
+  font-size: 28px;
+  font-family: 'Roboto Bold', sans-serif;
+  color: #34495e;
+  margin: 0;
+}
+
+.edit-btn, .save-btn {
+  background: #37b8c0;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Roboto Bold', sans-serif;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+}
+
+.edit-btn:hover, .save-btn:hover {
+  background: #2da3a8;
+  transform: scale(1.05);
+}
+
+.edit-btn:active, .save-btn:active {
+  background: #228c91;
+  transform: scale(0.98);
+}
+
+.edit-btn {
+  max-width: 80px;
+}
+
+.save-btn {
+  max-width: 150px;
+}
+
+.cancel-btn {
+  background: #e53935; /* Red for cancel */
+  max-width: 150px;
+  align-items: flex-end;
+  height: 44px;
+  font-family: 'Roboto Bold', sans-serif;
+}
+
+.cancel-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.05);
+}
+
+.cancel-btn:active {
+  background: #b71c1c;
+  transform: scale(0.98);
+}
+
+.doctor-profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-section label {
+  font-size: 16px;
+  color: #5c7d8a;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-bottom: 5px;
+}
+
+.profile-input,
+.profile-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Remove number input arrows (spinners) for fees amount (already handled for type="text") */
+.profile-input[type="text"] {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Ensure no arrows in Firefox */
+.profile-input[type="text"]::-webkit-inner-spin-button,
+.profile-input[type="text"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.profile-input:focus,
+.profile-select:focus {
+  border-color: #37b8c0;
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+.profile-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #34495e;
+  font-family: 'Roboto Condensed', sans-serif;
+  background: #f5f5f5;
+  margin-top: 5px;
+}
+
+.service-type-checkboxes {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.service-type-checkboxes label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #5c7d8a;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.service-type-checkboxes input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+}
+
+/* Fees Section Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #5c7d8a;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .doctor-profile-container {
+    padding: 30px;
+    max-width: 900px;
+  }
+
+  .doctor-profile-header {
+    margin-bottom: 30px;
+  }
+
+  .profile-input,
+  .profile-select,
+  .profile-field {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .profile-section label {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-profile-container {
+    padding: 10px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .doctor-profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .back-button,
+  .edit-btn,
+  .cancel-btn,
+  .save-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    max-width: 100px;
+  }
+
+  .doctor-profile-title {
+    font-size: 20px;
+  }
+
+  .profile-input,
+  .profile-select,
+  .profile-field {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .profile-section label {
+    font-size: 14px;
+  }
+
+  .service-type-checkboxes {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

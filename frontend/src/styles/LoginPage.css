@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Bold:wght@400&family=Roboto+Condensed:wght@400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Login Container */
+.login-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5; /* Light gray background, matching other pages */
+  padding: 20px;
+  overflow: hidden; /* Prevent any scrolling */
+}
+
+/* Login Content */
+.login-content {
+  background: #fff;
+  width: 100%;
+  max-width: 480px; /* Slightly wider for better readability */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth, matching other pages */
+  text-align: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  overflow: hidden; /* Prevent any internal scrolling */
+}
+
+/* Logo */
+.login-logo {
+  width: 350px; /* Adjusted for better visibility, matching screenshot */
+  height: auto;
+  margin-bottom: 30px; /* Rounded corners for consistency */
+}
+
+/* Title */
+.login-title {
+  font-size: 28px;
+  font-family: 'Roboto Bold', sans-serif;
+  color: #34495e; /* Dark blue-gray, matching other pages */
+  margin-bottom: 30px;
+}
+
+/* Form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%; /* Ensure form fills container */
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left; /* Align labels left, inputs centered within form */
+}
+
+/* Label */
+.form-label {
+  font-size: 16px;
+  color: #5c7d8a; /* Subtle gray, matching other pages */
+  text-align: left;
+}
+
+/* Input */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #37b8c0; /* Teal border, matching screenshot */
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff; /* White background for inputs */
+}
+
+.form-input:focus {
+  border-color: #37b8c0; /* Maintain teal focus, matching other pages */
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+/* Error Message */
+.error-message {
+  color: #e53935; /* Red for errors, matching other pages */
+  font-size: 14px;
+  text-align: center; /* Center the error message, fixing left alignment */
+  padding: 5px 10px;
+  background: #ffebee; /* Light red background for visibility */
+  border-radius: 4px;
+  margin-top: 10px; /* Add spacing above error */
+}
+
+/* Login Button */
+.login-button {
+  padding: 12px 20px;
+  background: #37b8c0; /* Teal, matching screenshot */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Roboto Bold', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow, matching other pages */
+  width: 100%; /* Ensure button spans full width, matching screenshot */
+  margin-top: 20px; /* Add spacing above button */
+}
+
+.login-button:hover {
+  background: #2da3a8; /* Darker teal on hover */
+  transform: scale(1.05);
+}
+
+.login-button:active {
+  background: #228c91; /* Even darker teal on active */
+  transform: scale(0.98);
+}
+
+.login-button:disabled {
+  background: #a7d8db; /* Disabled state, lighter teal */
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-content {
+    max-width: 100%; /* Full width on mobile */
+    padding: 20px; /* Reduce padding on mobile */
+    margin: 0 10px; /* Add small margin on sides */
+  }
+
+  .login-logo {
+    width: 150px; /* Smaller logo on mobile */
+    margin-bottom: 20px;
+  }
+
+  .login-title {
+    font-size: 24px; /* Smaller title on mobile */
+    margin-bottom: 20px;
+  }
+
+  .form-input {
+    padding: 10px 12px; /* Smaller padding on mobile */
+    font-size: 14px;
+  }
+
+  .login-button {
+    padding: 10px 18px; /* Smaller button on mobile */
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-content {
+    max-width: 500px; /* Slightly wider on large screens */
+    padding: 50px; /* Increase padding on large screens */
+  }
+}

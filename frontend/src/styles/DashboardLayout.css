@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Bold:wght@400&family=Roboto+Condensed:wght@400&display=swap');
+
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #37b8c0;
+  color: #fff;
+  padding: 20px 10px; /* Reduced padding to align hamburger icon left */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  transition: width 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.sidebar.collapsed {
+  width: 60px; /* Width for collapsed state, showing only icons */
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: flex-start; /* Align hamburger and logo to the left */
+  gap: 10px; /* Space between hamburger and logo */
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  align-items: left;
+  cursor: pointer;
+  transition: transform 0.2s;
+  padding: 0; /* Remove padding to push left */
+}
+
+.toggle-btn:hover {
+  transform: scale(1.1);
+}
+
+.toggle-icon {
+  font-size: 24px;
+}
+
+.logo-box {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1; /* Allow logo to expand in collapsed state */
+}
+
+.sidebar-logo {
+  width: 600px; /* Wider and taller as requested */
+  height: 20px;
+  max-width: 100%; /* Ensure logo fits in collapsed state */
+}
+
+/* Hide logo in collapsed state */
+.sidebar.collapsed .logo-box {
+  display: none;
+}
+
+/* Sidebar Menu */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s ease-in-out;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 19px;
+}
+
+.sidebar-menu li:hover {
+  background: #2da3a8;
+}
+
+.sidebar-menu li.active {
+  font-weight: bold;
+  background: #228c91;
+  font-family: 'Roboto Bold', sans-serif;
+}
+
+.sidebar-icon {
+  font-size: 24px; /* Larger icons for visibility in collapsed state */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Ensure consistent icon size */
+}
+
+.sidebar-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure icons are visible in collapsed state */
+.sidebar.collapsed .sidebar-menu li {
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.sidebar.collapsed .sidebar-text {
+  display: none;
+}
+
+.sidebar.collapsed .logout {
+    display: none;
+}
+/* Logout Button */
+.logout {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+
+.logout button {
+  background: #004c46;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout button:hover {
+  background: #002f2c;
+  transform: scale(1.05);
+}
+
+.logout button:active {
+  background: #001b18;
+  transform: scale(0.98);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin-left: 250px; /* Default margin for expanded sidebar */
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.expanded {
+  margin-left: 60px; /* Margin for collapsed sidebar */
+}

@@ -1,0 +1,589 @@
+/* Doctor Header */
+.doctor-header {
+  display: flex;
+  align-items: left; /* Vertically centers items */
+  justify-content: left; /* Centers items horizontally */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Doctor title */
+.doctor-title {
+  font-size: 24px;
+  margin: 0;
+  font-family: 'Roboto Bold', sans-serif; /* Match header font */
+}
+
+/* Subtle divider line */
+.doctor-divider {
+  width: 100%;
+  height: 1px;
+  background: #ddd;
+  margin: 10px 0 15px 0;
+}
+
+/* Search & Filter Row - Full width container */
+.doctor-search-row {
+  display: flex;
+  align-items: center; /* Vertically centers items */
+  gap: 15px; /* Increased space for better readability, matching Patient.css */
+  margin-bottom: 15px;
+  margin-top: 20px;
+  width: 100%; /* Ensures the row spans the full width */
+  max-width: calc(100vw - 40px); /* Limit width to viewport minus padding, preventing empty gaps */
+  padding: 0 20px; /* Add padding to match container */
+}
+
+/* Search bar */
+.doctor-search {
+  flex: 1; /* Allows the search bar to grow and take up available space */
+  min-width: 200px; /* Ensures a minimum width for usability */
+  font-size: 14px;
+  padding: 10px 15px; /* Adjusted padding for better proportions, matching Patient.css */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: all 0.2s;
+  height: 42.5px; /* Match the height of the filter button, matching Patient.css */
+  font-family: 'Roboto Condensed', sans-serif; /* Match form font, aligning with Patient.css */
+}
+
+/* Filter button */
+.filter-button {
+  flex: 0 0 auto; /* Prevents the button from growing or shrinking */
+  max-width: 110px; /* Slightly wider for better text fit, matching Patient.css */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Centers content inside the button */
+  gap: 6px; /* Increased space between icon and text, matching Patient.css */
+  padding: 9px 14px; /* Slightly larger padding for better touch targets, matching Patient.css */
+  font-size: 14px; /* Slightly larger font for readability, matching Patient.css */
+  background-color: #37b8c0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  height: 42px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth, matching Patient.css */
+}
+
+/* Compact add button */
+.doctor-add-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  width: 100%; /* Ensures the row spans the full width */
+  max-width: calc(100vw - 40px); /* Limit width to viewport minus padding, preventing empty gaps */
+  padding: 0 20px; /* Add padding to match container */
+}
+
+/* Add button */
+.add-button {
+  flex: 0 0 auto; /* Prevents the button from growing or shrinking */
+  max-width: 110px; /* Slightly wider for better text fit, matching Patient.css */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Centers content inside the button */
+  gap: 6px; /* Increased space between icon and text, matching Patient.css */
+  padding: 9px 14px; /* Slightly larger padding for better touch targets, matching Patient.css */
+  height: 42px;
+  font-size: 14px; /* Slightly larger font for readability, matching Patient.css */
+  background-color: #37b8c0; /* Updated to match UI/UX (teal instead of red), matching Patient.css */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth, matching Patient.css */
+}
+
+/* Icon sizes */
+.filter-icon,
+.add-icon {
+  font-size: 16px !important; /* Slightly larger icons for better visibility, matching Patient.css */
+}
+
+/* Hover and active states */
+.doctor-search:hover { background-color: #f9f9f9; }
+.doctor-search:focus { box-shadow: 0 0 5px rgba(55, 184, 192, 0.5); outline: none; }
+.filter-button:hover { background-color: #2da3a8; transform: scale(1.05); }
+.filter-button:active { background-color: #228c91; transform: scale(0.98); }
+.add-button:hover { background-color: #2da3a8; transform: scale(1.05); }
+.add-button:active { background-color: #228c91; transform: scale(0.98); }
+
+/* Doctor Table Styles */
+.doctor-table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+  width: 100%; /* Ensures the table spans the full width */
+  max-width: calc(100vw - 40px); /* Limit width to viewport minus padding, preventing empty gaps */
+  padding: 0 20px; /* Add padding to match container */
+}
+
+.doctor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for depth, matching Patient.css */
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Roboto Condensed', sans-serif; /* Match form font, aligning with Patient.css */
+}
+
+.doctor-table th {
+  padding: 12px 15px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px; /* Consistent font size, matching Patient.css */
+  font-family: 'Roboto Bold', sans-serif; /* Updated to Roboto Bold for heading row */
+  background: #37b8c0; /* Ensure teal background for thead */
+  color: #fff; /* White text for contrast */
+}
+
+.doctor-table td {
+  padding: 12px 15px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px; /* Consistent font size, matching Patient.css */
+  font-family: 'Roboto Condensed', sans-serif; /* Keep tbody in Roboto Condensed */
+}
+
+.doctor-table thead {
+  background: #37b8c0; /* Updated to teal for color scheme, matching Patient.css */
+  color: #fff; /* White text for contrast, matching Patient.css */
+  cursor: pointer;
+}
+
+.doctor-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.doctor-table tbody tr:hover {
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+.doctor-table th:not(:last-child),
+.doctor-table td:not(:last-child) {
+  border-right: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* 3D Filter Dropdown Styles */
+.filter-dropdown-3d {
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  width: 300px; /* Adjust as needed */
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 15px;
+  z-index: 1000;
+  font-family: 'Roboto Condensed', sans-serif; /* Match form font, aligning with Patient.css */
+}
+
+/* Uppercase heading in smaller text */
+.filter-heading {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Filter section for specialties, service type, etc. */
+.filter-section {
+  margin-bottom: 15px;
+}
+
+.filter-section-title {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Rows for each filter item */
+.filter-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* text on left, check icon on right */
+  padding: 8px 0; /* Slightly larger padding for touch targets, matching Patient.css */
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.1s;
+  position: relative;
+}
+
+/* Hover effect */
+.filter-item-row:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}
+
+/* If selected, show a highlight color and the check icon */
+.filter-item-row.selected {
+  background-color: #e6f5f5; /* Subtle highlight, matching Patient.css */
+}
+
+/* The text of the filter item */
+.filter-item-name {
+  font-size: 14px;
+  color: #333;
+}
+
+/* The check icon on the right side, visible only if selected */
+.filter-check-icon {
+  font-size: 16px;
+  color: #37b8c0;
+}
+
+/* No items message */
+.filter-no-items {
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+/* Apply Button at the bottom of the filter dropdown */
+.apply-button {
+  width: 100%;
+  padding: 10px 0; /* Slightly larger padding for touch targets, matching Patient.css */
+  background-color: #37b8c0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth, matching Patient.css */
+}
+
+.apply-button:hover {
+  background-color: #2da3a8;
+  transform: scale(1.05);
+}
+
+.apply-button:active {
+  background-color: #228c91;
+  transform: scale(0.98);
+}
+
+/* Modal Overlay and Content for Add Doctor */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it appears above everything */
+}
+
+.modal-content {
+  background: #fff;
+  width: 800px; /* Significantly wider to accommodate name row and sections */
+  padding: 30px; /* Increased padding for spaciousness */
+  border-radius: 12px; /* Slightly larger radius for a modern look */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Enhanced 3D shadow */
+  position: relative;
+  font-family: 'Roboto Condensed', sans-serif; /* Match form font, aligning with Patient.css */
+  max-height: 90vh; /* Prevent overflow on smaller screens */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+.modal-content h2 {
+  font-family: 'Roboto Bold', sans-serif;
+  font-size: 28px; /* Larger for prominence */
+  margin-bottom: 25px;
+  color: #34495e; /* Darker title color for contrast */
+}
+
+/* Form Section Styling */
+.form-section {
+  margin-bottom: 30px; /* Increased spacing between sections */
+}
+
+.section-title {
+  font-family: 'Roboto Bold', sans-serif;
+  font-size: 18px; /* Clear section heading size */
+  color: #5c7d8a; /* Subtle title color */
+  margin-bottom: 15px; /* Space before divider */
+}
+
+.section-divider {
+  width: 100%;
+  height: 2px; /* Thicker divider for prominence */
+  background: #ddd; /* Light gray divider */
+  margin-bottom: 20px; /* Space after divider */
+}
+
+/* Name Row Layout */
+.name-row {
+  display: flex;
+  gap: 20px; /* Space between name fields */
+  align-items: flex-start; /* Align fields at the top */
+  margin-bottom: 10px; /* Slight spacing below the row */
+}
+
+.name-field {
+  flex: 1; /* Distribute width evenly among name fields */
+  min-width: 0; /* Prevent overflow */
+}
+
+/* Form inside the modal */
+.add-doctor-form .form-group {
+  margin-bottom: 15px; /* Reduced spacing within sections for compactness */
+}
+
+.add-doctor-form label {
+  font-size: 15px; /* Slightly larger for readability */
+  margin-bottom: 6px; /* Increased spacing */
+  color: #5c7d8a; /* Subtle label color */
+}
+
+.add-doctor-form label span {
+  color: #e53935; /* Bright red for required fields */
+}
+
+.add-doctor-form input[type="text"],
+.add-doctor-form input[type="email"],
+.add-doctor-form input[type="tel"] {
+  font-size: 14px;
+  width: 100%;
+  padding: 12px 14px; /* Larger padding for touch targets and readability */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Roboto Condensed', sans-serif; /* Match form font, aligning with Patient.css */
+}
+
+.add-doctor-form input:focus {
+  border-color: #37b8c0;
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  gap: 25px; /* Increased space for better readability */
+  align-items: center; /* Vertically centers checkbox labels */
+  margin-top: 5px; /* Slight spacing above checkboxes */
+}
+
+/* Ensure labels within the checkbox group are inline */
+.checkbox-group label {
+  display: inline-flex; /* Use inline-flex for better control */
+  align-items: center; /* Vertically centers text with checkbox */
+  gap: 8px; /* Increased space between checkbox and text */
+  font-size: 14px; /* Consistent font size */
+  color: #333;
+}
+
+/* Adjust the checkbox input style */
+.checkbox-group input[type="checkbox"] {
+  margin: 0; /* Remove any default margin */
+  vertical-align: middle; /* Aligns checkbox vertically with text */
+  width: 16px; /* Slightly larger checkbox */
+  height: 16px; /* Slightly larger checkbox */
+}
+
+/* Modal action buttons */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px; /* Increased spacing for better readability */
+  margin-top: 25px; /* Increased spacing */
+}
+
+/* Modal: Close Button Styles */
+.close-button {
+  position: absolute;
+  top: 12px; /* Slightly lower for better positioning */
+  right: 12px; /* Slightly wider for better positioning */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px; /* Slightly larger for better touch targets */
+  height: 32px; /* Slightly larger for better touch targets */
+  background: #e53935; /* Red background for the box */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 50%; /* Ensure circular shape */
+  z-index: 1001; /* Ensure it stays above other content */
+}
+
+.close-button .close-icon {
+  font-size: 24px !important; /* Larger, readable size for the ✕ icon */
+  color: #fff; /* White icon for contrast against red background */
+  transition: transform 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.1);
+}
+
+.close-button:active {
+  transform: scale(0.95);
+}
+
+.submit-btn {
+  width: 120px; /* Fixed width for consistency */
+  padding: 12px 20px; /* Slightly larger for better touch targets */
+  background: #37b8c0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 14px; /* Consistent font size */
+  font-family: 'Roboto Bold', sans-serif; /* Match header font */
+}
+
+.submit-btn:hover {
+  background: #2da3a8;
+  transform: scale(1.05);
+}
+
+.submit-btn:active {
+  background: #228c91;
+  transform: scale(0.98);
+}
+
+
+/* ... (Keep existing CSS unchanged until the new sections) ... */
+
+/* Doctor Table Styles (Updated for Fees Column) */
+.doctor-table th:nth-child(5), /* Fees column header */
+.doctor-table td:nth-child(5) { /* Fees column data */
+  padding: 12px 15px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  border-right: 1px solid #ddd;
+}
+
+.doctor-table th:nth-child(5) {
+  font-family: 'Roboto Bold', sans-serif; /* Use Roboto Bold for heading row */
+  background: #37b8c0; /* Ensure teal background for thead */
+  color: #fff; /* White text for contrast */
+}
+
+/* Fees Input and Select in Modal */
+.doctor-input,
+.doctor-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 15px;
+}
+
+.doctor-input:focus,
+.doctor-select:focus {
+  border-color: #37b8c0;
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+/* Fees Section in Modal */
+.form-section .form-group {
+  margin-bottom: 15px;
+}
+
+/* Cancel Button for Modal */
+.cancel-btn {
+  width: 120px;
+  padding: 12px 20px;
+  background: #ccc;
+  color: #34495e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  font-family: 'Roboto Bold', sans-serif;
+}
+
+.cancel-btn:hover {
+  background: #999;
+  transform: scale(1.05);
+}
+
+.cancel-btn:active {
+  background: #666;
+  transform: scale(0.98);
+}
+
+/* ... (Keep remaining CSS unchanged, including Responsive Design) ... */
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .doctor-search-row,
+  .doctor-add-container,
+  .doctor-table-container {
+    padding: 0 40px; /* Increase padding on larger screens for better spacing, matching Patient.css */
+    max-width: calc(100vw - 80px); /* Adjust max-width for larger screens, matching Patient.css */
+  }
+
+  .doctor-table {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on monitors, matching Patient.css */
+  }
+
+  .doctor-search {
+    min-width: 250px; /* Increase minimum width on larger screens, matching Patient.css */
+  }
+
+  .filter-button,
+  .add-button {
+    max-width: 120px; /* Slightly wider buttons on larger screens, matching Patient.css */
+    padding: 10px 16px; /* Adjust padding for larger screens, matching Patient.css */
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-search-row,
+  .doctor-add-container,
+  .doctor-table-container {
+    padding: 0 10px; /* Reduce padding on smaller screens, matching Patient.css */
+    max-width: calc(100vw - 20px); /* Adjust max-width for smaller screens, matching Patient.css */
+  }
+
+  .doctor-search {
+    min-width: 150px; /* Reduce minimum width on smaller screens, matching Patient.css */
+  }
+
+  .filter-button,
+  .add-button {
+    max-width: 90px; /* Smaller buttons on mobile, matching Patient.css */
+    padding: 8px 12px; /* Adjust padding for smaller screens, matching Patient.css */
+  }
+
+  .doctor-title {
+    font-size: 20px; /* Smaller title on mobile, matching Patient.css */
+  }
+
+  .doctor-table th,
+  .doctor-table td {
+    padding: 10px 12px; /* Reduce padding in table cells on mobile, matching Patient.css */
+    font-size: 12px; /* Smaller font on mobile, matching Patient.css */
+  }
+}

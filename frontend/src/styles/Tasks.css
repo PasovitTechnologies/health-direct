@@ -1,0 +1,820 @@
+/* General Container */
+.tasks-container {
+  padding: 30px 40px; /* Increased padding for spaciousness */
+  color: #2c3e50;
+  font-family: "Inter", sans-serif;
+  max-width: 1400px; /* Slightly wider max-width to use more of the page */
+  margin: 0 auto;
+  width: 100%; /* Ensure full width */
+}
+
+/* Titles */
+.tasks-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 20px;
+  text-align: left; /* Align titles to the left */
+}
+
+.view-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #5c7d8a;
+  margin-bottom: 25px;
+  text-align: left; /* Align titles to the left */
+}
+
+/* Navigation Bar */
+.tasks-nav {
+  display: flex;
+  justify-content: space-between; /* Spread out elements across the width */
+  align-items: center;
+  margin-bottom: 10px; /* Reduced margin for filter row spacing */
+  width: 100%; /* Ensure full width */
+}
+
+/* Filter Row (New row for filter button) */
+.filter-row {
+  display: flex;
+  justify-content: flex-end; /* Align filter button to the right */
+  margin-bottom: 20px; /* Space below navigation */
+}
+
+/* Month Navigation */
+.month-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the month title and Today button vertically */
+  text-align: center; /* Ensure text is centered */
+  gap: 10px; /* Spacing between Today button and month title */
+}
+
+.today-btn {
+  background: #37b8c0;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Increased padding for better button size */
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.today-btn:hover {
+  background: #2fa3ab;
+}
+
+.nav-btn {
+  background: white;
+  border: 2px solid #37b8c0;
+  padding: 10px 14px; /* Slightly larger padding */
+  color: #37b8c0;
+  font-size: 20px; /* Slightly larger font for visibility */
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Increased size for better touch targets */
+  height: 50px;
+}
+
+.nav-btn:hover {
+  background: #37b8c0;
+  color: white;
+}
+
+.nav-btn:active {
+  transform: scale(0.9);
+}
+
+.month-title {
+  font-size: 24px; /* Slightly larger for prominence */
+  color: #34495e;
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer; /* Indicate clickable for day picker */
+  transition: color 0.2s;
+}
+
+.month-title:hover, .month-title:focus {
+  color: #2fa3ab;
+  outline: none;
+}
+
+/* Weekday Labels */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 0; /* Increased padding */
+  background: #e6f9fa;
+  color: #34495e;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 10px; /* Added margin for spacing */
+}
+
+.weekday-label {
+  padding: 10px; /* Increased padding */
+  font-size: 16px; /* Slightly larger font */
+}
+
+/* Calendar Grid (Scrollable for filtered range) */
+.calendar-grid.month-view-scrollable {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px; /* Increased gap for spacing */
+  background: white;
+  padding: 20px; /* Increased padding */
+  border-radius: 0 0 12px 12px; /* Slightly larger radius */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  width: 100%; /* Ensure full width */
+  max-height: calc(100vh - 200px); /* Allow scrolling, adjust for viewport */
+  overflow-y: auto; /* Enable vertical scrolling for long date ranges */
+  scrollbar-width: thin; /* Subtle scrollbar for modern browsers */
+  scrollbar-color: #37b8c0 #f0f0f0; /* Custom scrollbar colors */
+}
+
+/* Each Day Cell */
+.day-cell {
+  padding: 15px;
+  min-height: 160px; /* Increased height for more space */
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out, background 0.2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #e6f9fa;
+}
+
+.day-cell:hover, .day-cell:focus {
+  transform: scale(1.03);
+  background: #e6f9fa;
+  outline: none;
+}
+
+.faded {
+  opacity: 0.5;
+  background: #f0f0f0;
+}
+
+.today {
+  border: 2px solid #37b8c0;
+  background: #e6f9fa;
+}
+
+.selected {
+  border: 2px solid #2fa3ab;
+  background: #d1f0f2;
+}
+
+/* Day Number */
+.day-number {
+  font-weight: bold;
+  font-size: 18px; /* Larger font for visibility */
+  color: #333;
+  margin-bottom: 10px; /* Increased margin */
+}
+
+/* Task List */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Add small gap between bubbles for better spacing */
+  max-height: 100%; /* Ensure the list doesn’t exceed the cell height */
+  overflow-y: auto;
+  min-width:50px /* Add scroll if there are many bubbles, but typically hidden by day-cell overflow */
+}
+
+/* Month View Task Bubble (Separate class for alignment) */
+.month-task-bubble {
+  background: #37b8c0;
+  color: white;
+  font-size: 12px; /* Smaller font for compactness */
+  padding: 4px 8px; /* Reduced padding for smaller size */
+  border-radius: 4px; /* Smaller radius for compactness */
+  margin: 4px auto; /* Center horizontally in month view */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer; /* Revert to pointer for clicking */
+  transition: background 0.2s ease-in-out, transform 0.2s ease-out;
+  display: inline-block; /* Align within task-list */
+  max-width: 100%; /* Prevent overflow */
+  min-width: 50px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.month-task-bubble:hover, .month-task-bubble:focus {
+  background: #2fa3ab;
+  outline: none;
+  transform: scale(1.02); /* Slight scale on hover for feedback */
+}
+
+/* Task Tooltip (Hover Popup) */
+.task-tooltip {
+  background: white;
+  border: 1px solid #37b8c0;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  color: #2c3e50;
+  z-index: 1001;
+  max-width: 220px;
+  line-height: 1.5;
+  position: fixed; /* Use fixed positioning for portal */
+}
+
+/* Tooltip Content */
+.task-tooltip-content {
+  margin: 0;
+  padding: 0;
+}
+
+.task-tooltip-content strong {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.task-tooltip-content p {
+  margin: 4px 0;
+  color: #2c3e50;
+}
+
+/* No arrow needed for tooltip */
+.task-tooltip::after {
+  display: none; /* Removes the arrow entirely */
+}
+
+/* More Tasks Indicator */
+.more-tasks {
+  font-size: 12px;
+  color: #34495e;
+  margin-top: 80px;
+  margin-left: 50px;
+}
+
+/* Day View Layout */
+.day-view {
+  padding: 10px 30px; /* Reduced top padding to push content up */
+  text-align: center;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title and back button horizontally */
+  margin-bottom: 15px; /* Increased margin for better spacing */
+}
+
+.back-btn {
+  background: #37b8c0;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  padding: 5px;
+  max-width: 50px;
+}
+
+.back-btn:hover {
+  background: #2a8a90;
+}
+
+.day-title {
+  font-size: 18px;
+  color: #333;
+  margin-left: 10px;
+}
+
+/* Time Scroller Wrapper (New wrapper for full-width control) */
+.time-scroller-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Time Scroller (Day View, with outer box) */
+.time-scroller {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  overflow-y: auto;
+  max-height: calc(100vh - 150px); /* Reduced height to push content up */
+  background: white;
+  border-radius: 10px; /* Slightly larger radius */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Outer box with shadow */
+  border: 1px solid #ccc; /* Lightened border for outer container */
+  width: 100%; /* Ensure full width */
+  margin-top: 0; /* Remove top margin to push up */
+}
+
+/* Time Slots (Left side with time labels, full box borders for vertical divider) */
+.time-slots {
+  width: 70px; /* Match time-label width */
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #f8f9fa;
+  border-radius: 10px 0 0 10px;
+  padding: 0; /* Remove vertical padding for precise alignment */
+  z-index: 5;
+}
+
+.time-slot {
+  height: 60px; /* Fixed height per hour */
+  display: flex; /* Use flex for centering */
+  align-items: center; /* Center vertically */
+  justify-content: flex-end; /* Align text to the right, maintaining alignment with dividers */
+  color: #333;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc; /* Lightened divider line for each hour */
+  border-right: 1px solid #ccc; /* Add right border to create vertical divider effect */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Time Label (Adjusted for precise alignment) */
+.time-label {
+  width: 70px; /* Wider for clarity */
+  font-weight: bold;
+  color: #333;
+  text-align: center; /* Maintain right alignment for visual consistency */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Task Timeline (Right side with task bubbles) */
+.task-timeline {
+  width: calc(100% - 70px); /* Full width minus time labels and divider */
+  margin-left: 71px; /* Offset for vertical divider (70px + 1px) */
+  position: relative;
+  height: 1440px; /* 24 hours * 60 minutes per hour */
+  background: white;
+  border-radius: 0 10px 10px 0;
+  overflow: hidden;
+}
+
+/* Horizontal Divider Lines for Each Hour (Aligned with time labels) */
+.task-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0; /* Reset to top for precise alignment */
+  height: 100%;
+  background: linear-gradient(to bottom, #ccc 1px, transparent 1px); /* Lightened divider lines */
+  background-size: 100% 60px; /* Match time-slot height (60px per hour) */
+  background-position: 0 0; /* Reset position, rely on time-slot padding for alignment */
+  z-index: 1; /* Below task bubbles */
+}
+
+/* Day View Task Bubble (Aligned with vertical divider, no overlap into time slots) */
+.task-bubble {
+  position: absolute;
+  background: #37b8c0;
+  color: white;
+  font-size: 12px; /* Smaller font for compactness */
+  padding: 4px 8px; /* Reduced padding for smaller size */
+  border-radius: 4px; /* Smaller radius for compactness */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 100; /* Below vertical divider but above horizontal dividers */
+  width: calc(100% - 71px); /* Full width minus vertical divider (71px) */
+  left: 71px; /* Start exactly at the vertical divider */
+  display: flex; /* Use flex for centering text */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
+
+/* Ensure task bubble text wraps if too long and remains centered */
+.task-bubble span {
+  text-align: center; /* Center text horizontally */
+  display: block; /* Ensure span behaves as a block for alignment */
+  max-width: 100%; /* Prevent overflow */
+  white-space: normal; /* Allow text to wrap if necessary */
+}
+
+.task-bubble:hover, .task-bubble:focus {
+  background: #2fa3ab;
+  outline: none;
+  transform: scale(1.02); /* No translateX, as left is fixed at 71px */
+}
+
+/* Appointment Bubble Styling (Month and Day View, aligned with vertical divider) */
+.appointment-bubble {
+  background: #4CAF50; /* Green for appointments, to differentiate from tasks (#37b8c0) */
+  color: white;
+  position: absolute;
+  font-size: 12px; /* Smaller font for compactness */
+  padding: 4px 8px; /* Reduced padding for smaller size */
+  border-radius: 4px; /* Smaller radius for compactness */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 10; /* Below vertical divider but above horizontal dividers */
+  width: calc(100% - 71px); /* Full width minus vertical divider (71px) */
+  left: 71px; /* Start exactly at the vertical divider */
+  display: flex; /* Use flex for centering text */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  max-width: 500px;
+}
+
+.appointment-bubble span {
+  text-align: center; /* Center text horizontally */
+  display: block; /* Ensure span behaves as a block for alignment */
+  max-width: 100%; /* Prevent overflow */
+  white-space: normal; /* Allow text to wrap if necessary */
+}
+
+.appointment-bubble:hover, .appointment-bubble:focus {
+  background: #45a049;
+  outline: none;
+  transform: scale(1.02); /* No translateX, as left is fixed at 71px */
+}
+
+/* Item Type Label (inside bubbles) */
+.item-type {
+  font-size: 10px;
+  margin-left: 5px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+/* Filter Button (Traditional filter icon, below right nav arrow) */
+.filter-btn {
+  background: #37b8c0;
+  max-width: 100px;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.3s;
+}
+
+.filter-btn:hover {
+  background: #2fa3ab;
+}
+
+.filter-btn .filter-icon {
+  font-size: 500px; /* Slightly smaller icon */
+  content: "≡"; /* Placeholder for slider icon (replace with SVG or image) */
+}
+
+/* Filter Modal Overlay */
+.filter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Filter Modal (Adjusted proportions) */
+.filter-modal {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 450px; /* Adjusted for proportion (slightly narrower for balance) */
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.filter-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap for better proportion */
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-section label {
+  font-size: 14px;
+  color: #5c7d8a;
+  font-weight: 500;
+}
+
+.filter-section .rdp {
+  --rdp-cell-size: 36px; /* Slightly larger for traditional feel */
+  --rdp-accent-color: #37b8c0;
+  --rdp-background-color: #fff;
+  --rdp-accent-color-dark: #2fa3ab;
+  --rdp-selected-color: #d1f0f2;
+  --rdp-outline: 2px solid #37b8c0;
+  width: 100%;
+}
+
+/* Filter Modal Actions */
+.filter-modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reset-btn, .cancel-btn, .apply-btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.reset-btn {
+  background: #fff;
+  color: #5c7d8a;
+  border: 1px solid #ddd;
+}
+
+.reset-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.cancel-btn {
+  background: #fff;
+  color: #5c7d8a;
+  border: 1px solid #ddd;
+}
+
+.cancel-btn:hover {
+  background: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.apply-btn {
+  background: #37b8c0;
+  color: white;
+}
+
+.apply-btn:hover {
+  background: #2fa3ab;
+  transform: scale(1.02);
+}
+
+/* Floating Add Task Button */
+.add-task-button {
+  position: fixed;
+  bottom: 30px; /* Increased for better spacing */
+  right: 40px; /* Increased for better spacing */
+  background: #37b8c0;
+  color: white;
+  font-size: 26px; /* Larger font */
+  border: none;
+  border-radius: 50%;
+  width: 60px; /* Increased size */
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  transition: background 0.3s, transform 0.2s;
+}
+
+.add-task-button:hover {
+  background: #2fa3ab;
+  transform: scale(1.1);
+}
+
+.add-task-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(55, 184, 192, 0.3);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  text-align: center;
+  padding: 30px; /* Increased padding */
+  color: #5c7d8a;
+  font-size: 18px; /* Larger font */
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  color: #ff4d4d;
+  padding: 20px; /* Increased padding */
+  background: #ffebee;
+  border-radius: 8px; /* Slightly larger radius */
+  margin: 20px 0; /* Increased margin */
+  font-size: 18px; /* Larger font */
+}
+
+/* ... (Keep existing CSS unchanged until Day Picker Styling) ... */
+
+/* Day Picker Styling */
+.day-picker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1002;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day-picker-content {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 300px; /* Adjust width for compactness, matching your screenshot */
+  max-height: 400px; /* Limit height for scrolling if needed */
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out; /* Smooth animation for opening */
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.day-picker {
+  --rdp-cell-size: 36px; /* Match calendar cell size, consistent with your design */
+  --rdp-accent-color: #37b8c0;
+  --rdp-background-color: #fff;
+  --rdp-accent-color-dark: #2fa3ab;
+  --rdp-selected-color: #d1f0f2;
+  --rdp-outline: 2px solid #37b8c0;
+  width: 100%; /* Ensure full width within day-picker-content */
+}
+
+.day-picker .rdp {
+  font-family: "Inter", sans-serif; /* Match your app's font */
+  color: #2c3e50;
+}
+
+.day-picker .rdp-month {
+  padding: 10px; /* Remove default padding for tighter layout */
+}
+
+.day-picker .rdp-caption {
+  font-weight: bold;
+  color: #34495e;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.day-picker .rdp-caption_dropdowns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px; /* Space between month and year dropdowns */
+}
+
+.day-picker .rdp-nav_button {
+  background: white;
+  border: 2px solid #37b8c0;
+  color: #37b8c0;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 0 5px; /* Add small margins for spacing */
+}
+
+.day-picker .rdp-nav_button:hover {
+  background: #37b8c0;
+  color: white;
+}
+
+.day-picker .rdp-nav_button:active {
+  transform: scale(0.9);
+}
+
+.day-picker .rdp-day {
+  border-radius: 4px;
+  transition: background 0.2s ease-in-out;
+  margin: 2px; /* Slight margin for spacing between cells */
+}
+
+.day-picker .rdp-day:hover:not(.rdp-day_disabled):not(.rdp-day_selected) {
+  background: #e6f9fa;
+  cursor: pointer;
+}
+
+.day-picker .rdp-day_selected {
+  background: #37b8c0 !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+
+.day-picker .rdp-day_today {
+  background: #d1f0f2; /* Highlight today with a light accent */
+  border: 1px solid #37b8c0;
+}
+
+.day-picker .rdp-day_disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Ensure dropdowns match the design */
+.day-picker select {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 14px;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.day-picker select:hover, .day-picker select:focus {
+  border-color: #37b8c0;
+  outline: none;
+}
+
+/* Fix potential overflow or alignment issues */
+.day-picker .rdp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.day-picker .rdp-head_cell {
+  text-align: center;
+  font-weight: bold;
+  color: #5c7d8a;
+  padding: 5px;
+}
+
+/* Ensure the calendar fits within the content area */
+.day-picker-content .rdp:not([hidden]) {
+  display: block;
+  margin: 0 auto;
+}
+

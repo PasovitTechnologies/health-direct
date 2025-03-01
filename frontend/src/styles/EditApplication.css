@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Bold:wght@400&family=Roboto+Condensed:wght@400&display=swap');
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background: #fff;
+  width: 900px; /* Wider for detailed form */
+  padding: 40px;
+  border-radius: 12px; /* Slightly larger radius for modern look */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Enhanced 3D shadow */
+  position: relative;
+  font-family: 'Roboto Condensed', sans-serif;
+  max-height: 90vh; /* Prevent overflow on smaller screens */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  animation: slideIn 0.3s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* Animation for 3D effect */
+@keyframes slideIn {
+  from {
+    transform: translateZ(-100px) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateZ(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background: #e53935; /* Red background for close button */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 50%; /* Circular shape */
+  z-index: 1001;
+}
+
+.close-button .close-icon {
+  font-size: 14px !important;
+  color: #fff;
+  transition: transform 0.2s ease;
+  transform: scale(1.5);
+}
+
+.close-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.1);
+}
+
+.close-button:active {
+  transform: scale(0.95);
+}
+
+/* Modal Title */
+.modal-title {
+  font-family: 'Roboto Bold', sans-serif;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #34495e;
+  text-align: center;
+}
+
+/* Form */
+.edit-application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: 20px;
+}
+
+/* Section Title (for Documents and Comments) */
+.section-title {
+  font-family: 'Roboto Bold', sans-serif;
+  font-size: 18px;
+  color: #5c7d8a;
+  margin-bottom: 15px;
+}
+
+/* Section Divider */
+.section-divider {
+  width: 100%;
+  height: 2px;
+  background: #ddd;
+  margin-bottom: 20px;
+}
+
+/* Label */
+.form-label {
+  font-size: 16px;
+  color: #5c7d8a;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Input */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: #37b8c0;
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+.form-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Select */
+.form-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  height: 44px; /* Consistent height with inputs */
+}
+
+.form-select:focus {
+  border-color: #37b8c0;
+  box-shadow: 0 0 5px rgba(55, 184, 192, 0.5);
+  outline: none;
+}
+
+/* Document Item */
+.document-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  justify-content: space-between; /* Ensure trash icon is on the right */
+}
+
+.document-icon {
+  font-size: 16px;
+  color: #d32f2f;
+}
+
+/* Delete Document Button (Red Trash Icon) */
+.delete-doc-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.delete-doc-btn:hover .trash-icon {
+  transform: scale(1.1);
+  color: #d32f2f; /* Maintain red, but ensure visibility on hover */
+}
+
+.delete-doc-btn:active .trash-icon {
+  transform: scale(0.95);
+}
+
+.trash-icon {
+  font-size: 16px;
+  color: #e53935; /* Red trash icon */
+}
+
+/* Comments Bubbles */
+.comments-bubbles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+  max-height: 150px; /* Allow more comments to be visible */
+  overflow-y: auto;
+  padding-right: 5px;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #37b8c0 #f5f5f5; /* Firefox */
+}
+
+/* WebKit browsers (Chrome, Safari, Edge) scrollbar styling */
+.comments-bubbles::-webkit-scrollbar {
+  width: 8px;
+}
+
+.comments-bubbles::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.comments-bubbles::-webkit-scrollbar-thumb {
+  background: #37b8c0;
+  border-radius: 4px;
+}
+
+.comments-bubbles::-webkit-scrollbar-thumb:hover {
+  background: #2da3a8;
+}
+
+.comment-bubble {
+  background: #e0f7fa;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 14px;
+  color: #34495e;
+  cursor: pointer;
+  border: 1px solid #37b8c0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 10px;
+}
+
+
+/* Delete Comment Button (Red Trash Icon) */
+.delete-comment-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.delete-comment-btn:hover .trash-icon {
+  color: #d32f2f; /* Maintain red, but ensure visibility on hover */
+}
+
+.delete-comment-btn:active .trash-icon {
+  transform: scale(0.95);
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Submit Button */
+.submit-btn {
+  padding: 12px 20px;
+  height: 45px;
+  background: #37b8c0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Roboto Bold', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  margin-top: 10px;
+}
+
+/* Delete Button */
+.delete-btn {
+  padding: 12px 20px;
+  height: 45px;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Roboto Bold', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.05);
+}
+
+.delete-btn:active {
+  background: #c62828;
+  transform: scale(0.98);
+}
+
+/* Cancel Button */
+.cancel-btn {
+  padding: 12px 20px;
+  background: #ccc;
+  color: #34495e;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: 'Roboto Bold', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  display: none;
+}
+
+.cancel-btn:hover {
+  background: #999;
+  transform: scale(1.05);
+}
+
+.cancel-btn:active {
+  background: #666;
+  transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%; /* Full width on mobile */
+    padding: 20px; /* Reduce padding on mobile */
+    max-height: 80vh; /* Adjust max height on mobile */
+  }
+
+  .modal-title {
+    font-size: 24px; /* Smaller title on mobile */
+    margin-bottom: 20px;
+  }
+
+  .form-input, .form-select {
+    padding: 10px 12px; /* Smaller padding on mobile */
+    font-size: 14px;
+  }
+
+  .submit-btn, .delete-btn, .cancel-btn {
+    padding: 10px 18px; /* Smaller buttons on mobile */
+    font-size: 14px;
+  }
+
+  .document-item, .comment-bubble {
+    font-size: 12px; /* Smaller text on mobile */
+  }
+}

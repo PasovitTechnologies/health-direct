@@ -1,0 +1,181 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #37b8c0;
+    max-width: 50px; /* Added max-width for consistency */
+  }
+  
+  .close-icon {
+    transition: color 0.3s ease;
+  }
+  
+  .close-icon:hover {
+    color: #2a8a90;
+  }
+  
+  .modal-title {
+    font-family: "Roboto Bold", sans-serif;
+    color: #37b8c0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .add-document-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-section {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    font-family: "Roboto Condensed", sans-serif;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .file-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .upload-btn, .add-url-btn, .remove-url-btn {
+    background-color: #37b8c0;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto Condensed", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+    max-width: 100px; /* Added max-width */
+    justify-content: center; /* Center content within 50px width */
+    overflow: hidden; /* Hide overflow text if any */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  .upload-btn:hover, .add-url-btn:hover {
+    background-color: #2a8a90;
+  }
+  
+  .remove-url-btn {
+    background-color: #ff4444;
+    padding: 6px 12px;
+    max-width: 50px; /* Added max-width */
+    justify-content: center; /* Center content within 50px width */
+  }
+  
+  .remove-url-btn:hover {
+    background-color: #cc0000;
+  }
+  
+  .upload-icon, .link-icon, .remove-icon {
+    font-size: 1rem;
+  }
+  
+  .url-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .url-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Roboto Condensed", sans-serif;
+  }
+  
+  .file-list {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  
+  .file-name {
+    font-family: "Roboto Condensed", sans-serif;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .error-message {
+    color: #ff4444;
+    font-family: "Roboto Condensed", sans-serif;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .submit-btn, .cancel-btn {
+    background-color: #37b8c0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Roboto Condensed", sans-serif;
+    transition: background-color 0.3s ease;
+    min-width: 200px; /* Added max-width */
+    justify-content: center; /* Center content within 50px width */
+    overflow: hidden; /* Hide overflow text if any */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  .submit-btn:hover, .cancel-btn:hover {
+    background-color: #2a8a90;
+  }
+  
+  .cancel-btn {
+    background-color: #ccc;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #999;
+  }
